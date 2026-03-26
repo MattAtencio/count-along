@@ -1,0 +1,58 @@
+{
+  "game": "count-along",
+  "personas": ["bloop", "sunny"],
+  "lines": [
+    { "id": "number-1", "text": "One!", "persona": "bloop", "trigger": "tap-count-1" },
+    { "id": "number-2", "text": "Two!", "persona": "bloop", "trigger": "tap-count-2" },
+    { "id": "number-3", "text": "Three!", "persona": "bloop", "trigger": "tap-count-3" },
+    { "id": "number-4", "text": "Four!", "persona": "bloop", "trigger": "tap-count-4" },
+    { "id": "number-5", "text": "Five!", "persona": "bloop", "trigger": "tap-count-5" },
+    { "id": "number-6", "text": "Six!", "persona": "bloop", "trigger": "tap-count-6" },
+    { "id": "number-7", "text": "Seven!", "persona": "bloop", "trigger": "tap-count-7" },
+    { "id": "number-8", "text": "Eight!", "persona": "bloop", "trigger": "tap-count-8" },
+    { "id": "number-9", "text": "Nine!", "persona": "bloop", "trigger": "tap-count-9" },
+    { "id": "number-10", "text": "Ten!", "persona": "bloop", "trigger": "tap-count-10" },
+    { "id": "number-11", "text": "Eleven!", "persona": "bloop", "trigger": "tap-count-11" },
+    { "id": "number-12", "text": "Twelve!", "persona": "bloop", "trigger": "tap-count-12" },
+    { "id": "number-13", "text": "Thirteen!", "persona": "bloop", "trigger": "tap-count-13" },
+    { "id": "number-14", "text": "Fourteen!", "persona": "bloop", "trigger": "tap-count-14" },
+    { "id": "number-15", "text": "Fifteen!", "persona": "bloop", "trigger": "tap-count-15" },
+    { "id": "number-16", "text": "Sixteen!", "persona": "bloop", "trigger": "tap-count-16" },
+    { "id": "number-17", "text": "Seventeen!", "persona": "bloop", "trigger": "tap-count-17" },
+    { "id": "number-18", "text": "Eighteen!", "persona": "bloop", "trigger": "tap-count-18" },
+    { "id": "number-19", "text": "Nineteen!", "persona": "bloop", "trigger": "tap-count-19" },
+    { "id": "number-20", "text": "Twenty!", "persona": "bloop", "trigger": "tap-count-20" },
+
+    { "id": "celebrate-great", "text": "Great job! You did it!", "persona": "sunny", "trigger": "target-reached" },
+    { "id": "celebrate-sunny-woohoo", "text": "Woohoo! Amazing counting!", "persona": "sunny", "trigger": "target-reached" },
+    { "id": "celebrate-sunny-amazing", "text": "You're amazing! Look at you go!", "persona": "sunny", "trigger": "target-reached" },
+    { "id": "celebrate-sunny-wonderful", "text": "Wonderful! That was perfect!", "persona": "sunny", "trigger": "target-reached" },
+    { "id": "celebrate-sunny-star", "text": "You're a counting star!", "persona": "sunny", "trigger": "target-reached" },
+
+    { "id": "celebrate-bloop-youdid", "text": "You did it, you did it!", "persona": "bloop", "trigger": "target-reached" },
+    { "id": "celebrate-bloop-wow", "text": "Wowww! That was so cool!", "persona": "bloop", "trigger": "target-reached" },
+    { "id": "celebrate-bloop-incredible", "text": "Incredible! Bloop bloop!", "persona": "bloop", "trigger": "target-reached" },
+    { "id": "celebrate-bloop-bloop", "text": "Bloop bloop bloop! You're the best!", "persona": "bloop", "trigger": "target-reached" },
+
+    { "id": "encourage-sunny-letsgo", "text": "Let's go! You can do it!", "persona": "sunny", "trigger": "round-start" },
+    { "id": "encourage-sunny-youcan", "text": "I know you can do this!", "persona": "sunny", "trigger": "round-start" },
+    { "id": "encourage-sunny-tryit", "text": "Let's try it! Tap to count!", "persona": "sunny", "trigger": "round-start" },
+    { "id": "encourage-sunny-believe", "text": "I believe in you! Let's count!", "persona": "sunny", "trigger": "round-start" },
+
+    { "id": "encourage-bloop-cmon", "text": "Come on, let's count together!", "persona": "bloop", "trigger": "round-start" },
+    { "id": "encourage-bloop-gogogo", "text": "Go go go! Tap tap tap!", "persona": "bloop", "trigger": "round-start" },
+    { "id": "encourage-bloop-ready", "text": "Ready? Let's do this!", "persona": "bloop", "trigger": "round-start" },
+
+    { "id": "tryagain-sunny-oops", "text": "Oops! Let's try again!", "persona": "sunny", "trigger": "retry" },
+    { "id": "tryagain-sunny-almost", "text": "Almost! One more try!", "persona": "sunny", "trigger": "retry" },
+    { "id": "tryagain-sunny-onemore", "text": "Let's try one more time!", "persona": "sunny", "trigger": "retry" },
+
+    { "id": "tryagain-bloop-uhoh", "text": "Uh oh! That's okay, try again!", "persona": "bloop", "trigger": "retry" },
+    { "id": "tryagain-bloop-oopsie", "text": "Oopsie! No worries, let's go again!", "persona": "bloop", "trigger": "retry" },
+    { "id": "tryagain-bloop-again", "text": "Again again again! Let's do it!", "persona": "bloop", "trigger": "retry" },
+
+    { "id": "instruction-count-to", "text": "Can you count to", "persona": "sunny", "trigger": "guided-prompt" },
+    { "id": "instruction-tap", "text": "Tap anywhere to add more!", "persona": "sunny", "trigger": "guided-hint" },
+    { "id": "instruction-welcome", "text": "Hi there! Let's count together!", "persona": "sunny", "trigger": "game-start" }
+  ]
+}

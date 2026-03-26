@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#6C5CE7"/>
+  <text x="256" y="200" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="120" fill="white">123</text>
+  <text x="256" y="320" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="64" fill="#A29BFE">Count</text>
+  <text x="256" y="400" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="64" fill="#A29BFE">Along</text>
+</svg>

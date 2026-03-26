@@ -1,32 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import FreeCount from "@/components/FreeCount";
 import GuidedCount from "@/components/GuidedCount";
-import { getMuted, setMuted as saveMuted } from "@/lib/storage";
+import { MuteButton } from "@kids-games/core/components";
 
 type Screen = "home" | "free" | "guided";
 
 export default function Home() {
   const [screen, setScreen] = useState<Screen>("home");
-  const [muted, setMuted] = useState(false);
-
-  useEffect(() => {
-    setMuted(getMuted());
-  }, []);
-
-  const toggleMute = useCallback(() => {
-    setMuted((prev) => {
-      const next = !prev;
-      saveMuted(next);
-      return next;
-    });
-  }, []);
 
   if (screen === "free") {
     return (
       <main className="h-screen flex flex-col">
-        <FreeCount muted={muted} onBack={() => setScreen("home")} />
+        <FreeCount onBack={() => setScreen("home")} />
       </main>
     );
   }
@@ -34,7 +21,7 @@ export default function Home() {
   if (screen === "guided") {
     return (
       <main className="h-screen flex flex-col">
-        <GuidedCount muted={muted} onBack={() => setScreen("home")} />
+        <GuidedCount onBack={() => setScreen("home")} />
       </main>
     );
   }
@@ -50,6 +37,9 @@ export default function Home() {
       >
         &#x1F3E0;
       </a>
+
+      {/* Mute toggle */}
+      <MuteButton />
 
       {/* Title */}
       <div className="text-center">
@@ -85,20 +75,6 @@ export default function Home() {
           Guided Count
         </button>
       </div>
-
-      {/* Mute toggle */}
-      <button
-        onClick={toggleMute}
-        className="mt-4 w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-2xl active:scale-95 transition-transform"
-        aria-label={muted ? "Unmute sounds" : "Mute sounds"}
-        aria-pressed={muted}
-      >
-        {muted ? (
-          <span aria-hidden="true">&#x1F507;</span>
-        ) : (
-          <span aria-hidden="true">&#x1F50A;</span>
-        )}
-      </button>
     </main>
   );
 }

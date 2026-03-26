@@ -8,6 +8,7 @@ const withPWA = withPWAInit({
 
 const nextConfig: NextConfig = {
   basePath: "/count-along",
+  transpilePackages: ["@kids-games/core"],
 };
 
 export default withPWA(nextConfig);
