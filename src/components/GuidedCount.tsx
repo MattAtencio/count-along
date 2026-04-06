@@ -40,6 +40,7 @@ export default function GuidedCount({
   const nextId = useRef(0);
   const cycleIndex = useRef(0);
   const categoryRef = useRef(0);
+  const lastTapTime = useRef(0);
 
   const { playPhrase } = useVoice();
   const { playTap } = useSoundEffects();
@@ -55,19 +56,17 @@ export default function GuidedCount({
   const setComponents = CATEGORY_SETS[CATEGORIES[categoryRef.current % CATEGORIES.length]];
 
   const handleCanvasTap = useCallback(
-    (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    (e: React.PointerEvent<HTMLDivElement>) => {
       if (celebrating) return;
 
-      const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
-      let clientX: number, clientY: number;
+      // Debounce: ignore taps within 200ms of the last accepted tap.
+      const now = Date.now();
+      if (now - lastTapTime.current < 200) return;
+      lastTapTime.current = now;
 
-      if ("touches" in e) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches[0].clientY;
-      } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-      }
+      const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
       let x = clientX - rect.left - OBJECT_SIZE / 2;
       let y = clientY - rect.top - OBJECT_SIZE / 2;
@@ -113,7 +112,7 @@ export default function GuidedCount({
         setOverCount(true);
       }
     },
-    [count, objects, celebrating, target, setComponents.length, playTap, playPhrase, celebrate]
+    [count, objects, celebrating, target, setComponents.length, playTap, playPhrase, celebrate, lastTapTime]
   );
 
   const handleNext = useCallback(() => {
@@ -173,8 +172,8 @@ export default function GuidedCount({
         onComplete={() => setCelebrationLevel(null)}
       />
 
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-4 py-2 shrink-0">
+      {/* Top bar — pl-16 clears the fixed BackToHub button */}
+      <div className="flex items-center justify-between pl-16 pr-4 py-2 shrink-0">
         <button
           onClick={onBack}
           className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl font-bold text-gray-600 active:scale-95 transition-transform"
@@ -201,8 +200,7 @@ export default function GuidedCount({
         className={`flex-1 relative bg-white rounded-3xl mx-3 mb-2 shadow-inner overflow-hidden cursor-pointer touch-none ${
           allBounce ? "animate-[all-bounce_500ms_ease-in-out]" : ""
         }`}
-        onClick={celebrating ? undefined : handleCanvasTap}
-        onTouchStart={celebrating ? undefined : handleCanvasTap}
+        onPointerUp={celebrating ? undefined : handleCanvasTap}
         role="application"
         aria-label={`Guided counting canvas. Target: ${target}. Current count: ${count}.`}
         aria-live="polite"

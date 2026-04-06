@@ -26,6 +26,7 @@ export default function FreeCount({
   const [countBounce, setCountBounce] = useState(0);
   const nextId = useRef(0);
   const cycleIndex = useRef(0);
+  const lastTapTime = useRef(0);
 
   const { playPhrase } = useVoice();
   const { playTap } = useSoundEffects();
@@ -34,19 +35,19 @@ export default function FreeCount({
   const setComponents = CATEGORY_SETS[category];
 
   const handleCanvasTap = useCallback(
-    (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    (e: React.PointerEvent<HTMLDivElement>) => {
       if (count >= MAX_COUNT) return;
 
-      const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
-      let clientX: number, clientY: number;
+      // Debounce: ignore taps within 200ms of the last accepted tap.
+      // Kids (ages 2-5) often trigger rapid duplicate events; this keeps
+      // the interaction forgiving without feeling sluggish.
+      const now = Date.now();
+      if (now - lastTapTime.current < 200) return;
+      lastTapTime.current = now;
 
-      if ("touches" in e) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches[0].clientY;
-      } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-      }
+      const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
       // Position relative to canvas, clamped to keep object visible
       let x = clientX - rect.left - OBJECT_SIZE / 2;
@@ -82,7 +83,7 @@ export default function FreeCount({
       playTap();
       playPhrase(`number-${newCount}`, "bloop");
     },
-    [count, objects, setComponents.length, playTap, playPhrase]
+    [count, objects, setComponents.length, playTap, playPhrase, lastTapTime]
   );
 
   const handleClear = useCallback(() => {
@@ -93,8 +94,8 @@ export default function FreeCount({
 
   return (
     <div className="flex flex-col h-full">
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-4 py-2 shrink-0">
+      {/* Top bar — pl-16 clears the fixed BackToHub button */}
+      <div className="flex items-center justify-between pl-16 pr-4 py-2 shrink-0">
         <button
           onClick={onBack}
           className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl font-bold text-gray-600 active:scale-95 transition-transform"
@@ -125,8 +126,7 @@ export default function FreeCount({
       {/* Canvas */}
       <div
         className="flex-1 relative bg-white rounded-3xl mx-3 mb-2 shadow-inner overflow-hidden cursor-pointer touch-none"
-        onClick={handleCanvasTap}
-        onTouchStart={handleCanvasTap}
+        onPointerUp={handleCanvasTap}
         role="application"
         aria-label={`Counting canvas. Current count: ${count}. Tap to add objects.`}
       >

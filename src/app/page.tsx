@@ -4,6 +4,7 @@ import { useState } from "react";
 import FreeCount from "@/components/FreeCount";
 import GuidedCount from "@/components/GuidedCount";
 import { MuteButton } from "@kids-games/core/components";
+import { BackToHub } from "@/components/BackToHub";
 
 type Screen = "home" | "free" | "guided";
 
@@ -13,6 +14,7 @@ export default function Home() {
   if (screen === "free") {
     return (
       <main className="h-screen flex flex-col">
+        <BackToHub />
         <FreeCount onBack={() => setScreen("home")} />
       </main>
     );
@@ -21,6 +23,7 @@ export default function Home() {
   if (screen === "guided") {
     return (
       <main className="h-screen flex flex-col">
+        <BackToHub />
         <GuidedCount onBack={() => setScreen("home")} />
       </main>
     );
@@ -29,16 +32,7 @@ export default function Home() {
   // Home screen
   return (
     <main className="h-screen flex flex-col items-center justify-center gap-8 px-6">
-      {/* Back to Hub */}
-      <a
-        href="/"
-        className="absolute top-4 left-4 w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl active:scale-90 transition-transform"
-        aria-label="Back to Kids Corner"
-      >
-        &#x1F3E0;
-      </a>
-
-      {/* Mute toggle */}
+      <BackToHub />
       <MuteButton />
 
       {/* Title */}
