@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/MattAtencio/portfolio/main/schemas/project.schema.json",
+  "id": "count-along",
+  "name": "Count Along",
+  "kind": "project",
+  "type": "game",
+  "status": "active",
+  "group": "games-kids",
+  "tags": ["kids", "public"]
+}
